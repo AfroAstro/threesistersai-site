@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Guide — 5 Signs Your Team Is Spending Time on Work AI Could Already Do | 3SistersAI</title>
+<meta name="description" content="A 5-minute read to spot where your team's hours are going, and what to do about it. Free from 3SistersAI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="icon" type="image/png" href="/assets/logo.png">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="nav-brand" href="/">
+      <img src="/assets/logo.png" alt="3SistersAI logo">
+      <span>AI Training and Automation</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/automation/">Automation</a>
+      <a href="/training/">Training</a>
+      <a href="/guide/">Free Guide</a>
+      <a class="btn" href="https://calendly.com/trinidad-grange-kyner-threesistersai/15min">Book a Free 15-Minute Call</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <p style="color:#a2df50;font-size:14px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:18px;">Free guide</p>
+    <h1>5 Signs Your Team Is Spending Time on Work AI Could Already Do</h1>
+    <p class="sub">A 5-minute read to spot where your team's hours are going, and what to do about it.</p>
+  </div>
+</div>
+
+<section class="alt">
+  <div class="wrap" style="display:flex;justify-content:center">
+    <div class="form-card">
+      <form id="guide-form" novalidate>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+        <!-- honeypot: real people never see or fill this -->
+        <div class="hp" aria-hidden="true">
+          <label for="company_website">Company website</label>
+          <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+        </div>
+        <button class="btn" type="submit">Send Me the Guide</button>
+        <p class="form-msg" id="form-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 3SistersAI · AI Training and Automation</div>
+    <nav>
+      <a href="/automation/">Automation</a>
+      <a href="/training/">Training</a>
+      <a href="/guide/">Free Guide</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// Supabase REST insert — safe to expose the ANON key only (never the service_role key).
+// The leads table has row-level security allowing anonymous INSERT and nothing else.
+var SUPABASE_URL = "https://nvjfcirezbfpijuutsdk.supabase.co";
+var SUPABASE_ANON_KEY = "PASTE_ANON_KEY_HERE"; // Supabase Dashboard -> Settings -> API -> anon public
+
+document.getElementById("guide-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var msg = document.getElementById("form-msg");
+  var name = document.getElementById("name").value.trim();
+  var email = document.getElementById("email").value.trim();
+
+  // spam honeypot: silently pretend success
+  if (document.getElementById("company_website").value) {
+    window.location.href = "/guide/thanks/";
+    return;
+  }
+  if (!name || !email || email.indexOf("@") < 1) {
+    msg.textContent = "Please enter your name and a valid email.";
+    msg.className = "form-msg err";
+    return;
+  }
+
+  msg.textContent = "Sending…";
+  msg.className = "form-msg";
+
+  fetch(SUPABASE_URL + "/rest/v1/leads", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_ANON_KEY,
+      "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({ name: name, email: email, source: "website-guide" })
+  })
+    .then(function (res) {
+      if (res.ok) {
+        window.location.href = "/guide/thanks/";
+      } else {
+        throw new Error("insert failed: " + res.status);
+      }
+    })
+    .catch(function () {
+      msg.textContent = "Something went wrong. Email us instead: trinidad.grange-kyner@threesistersai.com";
+      msg.className = "form-msg err";
+    });
+});
+</script>
+
+</body>
+</html>
