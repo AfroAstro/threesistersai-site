@@ -13,6 +13,7 @@ Static site hosted on GitHub Pages. No build step: edit the HTML, commit, push, 
 | `automation/index.html` | Automation + booking CTA |
 | `guide/index.html` | Free guide opt-in (form posts to Supabase) |
 | `guide/thanks/index.html` | Guide download page |
+| `privacy/index.html` | Privacy policy |
 | `assets/` | Stylesheet, logo, lead magnet PDF |
 
 ## Editing
