@@ -72,7 +72,7 @@
 // Supabase REST insert — safe to expose the ANON key only (never the service_role key).
 // The leads table has row-level security allowing anonymous INSERT and nothing else.
 var SUPABASE_URL = "https://nvjfcirezbfpijuutsdk.supabase.co";
-var SUPABASE_ANON_KEY = "PASTE_ANON_KEY_HERE"; // Supabase Dashboard -> Settings -> API -> anon public
+var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52amZjaXJlemJmcGlqdXV0c2RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5OTIzMzQsImV4cCI6MjA4NzU2ODMzNH0.UYvbwi1j4-ptfiiIhSu1rYdw8OUblHxTUKHQSJbr8Fo"; // Supabase Dashboard -> Settings -> API -> anon public
 
 document.getElementById("guide-form").addEventListener("submit", function (e) {
   e.preventDefault();
