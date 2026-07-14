@@ -34,6 +34,7 @@ header {
   z-index: 50;
 }
 .nav {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,6 +60,31 @@ header {
 }
 .nav-links a:hover { color: var(--lime); }
 .nav-links a.btn { font-size: 14px; }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle .bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* Buttons */
 .btn {
@@ -260,7 +286,7 @@ h2 {
 footer { background: var(--navy); color: var(--muted); padding: 44px 0; font-size: 14px; }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; align-items: center; }
 footer a { color: var(--lime); text-decoration: none; font-weight: 600; }
-footer nav { display: flex; gap: 20px; }
+footer nav { display: flex; flex-wrap: wrap; gap: 12px 20px; }
 
 /* Page hero (inner pages) */
 .page-hero { background: var(--navy); color: var(--white); padding: 64px 0; }
@@ -286,8 +312,29 @@ footer nav { display: flex; gap: 20px; }
 }
 
 @media (max-width: 720px) {
-  .nav-links a:not(.btn) { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--navy);
+    padding: 0 24px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+  .nav-links.open { max-height: 320px; padding: 10px 24px 22px; }
+  .nav-links a:not(.btn) { display: block; padding: 13px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+  .nav-links a.btn { display: block; text-align: center; margin: 18px 0 6px; }
   .hero { padding: 60px 0 68px; }
   section { padding: 56px 0; }
   .quote-block { padding: 32px 26px; }
+}
+
+@media (max-width: 400px) {
+  .nav-brand span { display: none; }
 }
