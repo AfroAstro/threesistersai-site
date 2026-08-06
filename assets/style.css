@@ -282,6 +282,13 @@ h2 {
 .form-msg.err { color: #b3261e; }
 .hp { position: absolute; left: -9999px; opacity: 0; }
 
+/* Subscribe */
+.subscribe { text-align: center; }
+.subscribe h2 { margin: 0 auto; }
+.subscribe .section-intro { margin: 14px auto 0; }
+.subscribe-form { margin-top: 34px; display: flex; justify-content: center; }
+.subscribe-form .form-card { text-align: left; }
+
 /* Footer */
 footer { background: var(--navy); color: var(--muted); padding: 44px 0; font-size: 14px; }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; align-items: center; }
